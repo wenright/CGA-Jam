@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
 
+	public GameObject hitParticleSystem;
+
 	private int speed = 100;
-	private int lifetime = 5;
+
+	private Vector3 lastPosition;
 
 	void Start () {
-		Destroy(gameObject, lifetime);
+		lastPosition = transform.position;
 	}
 
 	void Update () {
 		transform.Translate(Vector3.up * speed * Time.deltaTime);
+
+		RaycastHit hit;
+
+		if (Physics.Linecast(lastPosition, transform.position, out hit)) {
+			Hit(hit);
+		}
+
+		lastPosition = transform.position;
+	}
+
+	void Hit (RaycastHit hit) {
+		// TODO damage target here
+
+		Instantiate(hitParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+
+		Destroy(gameObject);
 	}
 }
