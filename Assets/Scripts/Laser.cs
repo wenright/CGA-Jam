@@ -6,7 +6,7 @@ public class Laser : MonoBehaviour {
 
 	public GameObject hitParticleSystem;
 
-	private int speed = 100;
+	private int speed = 250;
 
 	private Vector3 lastPosition;
 
@@ -28,6 +28,10 @@ public class Laser : MonoBehaviour {
 
 	void Hit (RaycastHit hit) {
 		// TODO damage target here
+		if (hit.transform.tag == "Ship") {
+			ShipHealth sh = hit.transform.gameObject.GetComponent<ShipHealth>();
+			sh.Hit(25);
+		}
 
 		Instantiate(hitParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
 
