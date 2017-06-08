@@ -6,6 +6,9 @@ public class ShipHealth : MonoBehaviour {
 
 	public int health = 100;
 
+	public bool isPlayer = false;
+	public GameObject flashImage;
+
 	void Start () {
 		
 	}
@@ -13,9 +16,18 @@ public class ShipHealth : MonoBehaviour {
 	public void Hit (int damage) {
 		health -= damage;
 
+		if (isPlayer && flashImage != null) {
+			flashImage.SetActive(true);
+			Invoke("HideFlash", 0.05f);
+		}
+
 		if (health <= 0) {
 			// TODO ship explosion particle system
 			Destroy(gameObject);
 		}
+	}
+
+	private void HideFlash () {
+		flashImage.SetActive(false);
 	}
 }

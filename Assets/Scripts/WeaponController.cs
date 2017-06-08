@@ -22,7 +22,10 @@ public class WeaponController : MonoBehaviour {
 
 	public void Fire () {
 		if (canFire) {
-			Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(0, 90, 90));
+			float randomRange = 1.0f;
+			Vector3 randomness = new Vector3(Random.Range(-randomRange, randomRange), Random.Range(-randomRange, randomRange), Random.Range(-randomRange, randomRange));
+			Vector3 angleOffset = new Vector3(0, 90, 90) + randomness;
+			Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(angleOffset));
 
 			canFire = false;
 			Invoke("ResetCanFire", ROF);

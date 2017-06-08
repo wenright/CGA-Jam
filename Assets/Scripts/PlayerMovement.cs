@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
+
+	public Text speedText;
 
 	private Rigidbody rb;
 	private float speed = 2000.0f;
@@ -46,5 +49,7 @@ public class PlayerMovement : MonoBehaviour {
 		} else if (Input.GetKey("o")) {
 			rb.AddRelativeTorque(0, 0, -rotationSpeed * Time.fixedDeltaTime);
 		}
+
+		speedText.text = ((int) rb.velocity.magnitude).ToString() + " KPH";
 	}
 }
