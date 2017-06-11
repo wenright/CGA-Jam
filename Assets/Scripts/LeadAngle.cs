@@ -19,7 +19,7 @@ public class LeadAngle : MonoBehaviour {
 	void Update () {
 		float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-		float timeToTarget = laserSpeed / distanceToPlayer;
+		float timeToTarget = distanceToPlayer / laserSpeed;
 
 		leadObject.position = transform.position + rb.velocity * timeToTarget;
 	}

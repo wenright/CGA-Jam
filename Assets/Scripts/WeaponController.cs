@@ -9,8 +9,10 @@ public class WeaponController : MonoBehaviour {
 
 	public bool isPlayer = false;
 
+	public float ROF = 0.15f;
+	public float accuracy = 1.0f;
+
 	private bool canFire = true;
-	private float ROF = 0.15f;
 
 	void Update () {
 		if (isPlayer) {
@@ -22,8 +24,7 @@ public class WeaponController : MonoBehaviour {
 
 	public void Fire () {
 		if (canFire) {
-			float randomRange = 1.0f;
-			Vector3 randomness = new Vector3(Random.Range(-randomRange, randomRange), Random.Range(-randomRange, randomRange), Random.Range(-randomRange, randomRange));
+			Vector3 randomness = new Vector3(Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy));
 			Vector3 angleOffset = new Vector3(0, 90, 90) + randomness;
 			Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(angleOffset));
 

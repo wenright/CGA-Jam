@@ -6,8 +6,8 @@ public class AiMovement : MonoBehaviour {
 
 	public Transform target;
 
-	private float speed = 750.0f;
-	private float rotationSpeed = 100.0f;
+	private float speed = 4000.0f;
+	private float rotationSpeed = 400.0f;
 
 	private int breakAwayDistance = 100;
 	private Vector3 breakAwayOffset;
@@ -17,6 +17,7 @@ public class AiMovement : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+
 		weaponController = GetComponent<WeaponController>();
 	}
 	

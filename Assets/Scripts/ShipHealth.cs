@@ -9,6 +9,8 @@ public class ShipHealth : MonoBehaviour {
 	public bool isPlayer = false;
 	public GameObject flashImage;
 
+	public GameObject explosionObject;
+
 	void Start () {
 		
 	}
@@ -22,7 +24,7 @@ public class ShipHealth : MonoBehaviour {
 		}
 
 		if (health <= 0) {
-			// TODO ship explosion particle system
+			Instantiate(explosionObject, transform.position, transform.rotation);
 			Destroy(gameObject);
 		}
 	}
