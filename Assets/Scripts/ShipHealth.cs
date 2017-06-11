@@ -35,8 +35,11 @@ public class ShipHealth : MonoBehaviour {
 
 			if (isPlayer) {
 				Camera.main.transform.parent = null;
+
+				// I just picked these numbers at random. Maybe use an RNG and tween into position, or even slow down time?
 				Camera.main.transform.position += new Vector3(-32, 42, -25);
 				Camera.main.transform.LookAt(transform);
+
 				HideFlash();
 			}
 

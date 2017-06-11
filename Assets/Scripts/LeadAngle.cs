@@ -7,9 +7,6 @@ public class LeadAngle : MonoBehaviour {
 	public Transform leadObject;
 	public Transform player;
 
-	// TODO this should be taken from weapon manager itself
-	private int laserSpeed = 250;
-
 	private Rigidbody rb;
 
 	void Start () {
@@ -17,13 +14,15 @@ public class LeadAngle : MonoBehaviour {
 	}
 
 	void Update () {
+		// TODO lead angle icon should be a GUI object so that it does not scale with distance
+
 		if (player == null) {
 			return;
 		}
 
 		float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-		float timeToTarget = distanceToPlayer / laserSpeed;
+		float timeToTarget = distanceToPlayer / Laser.speed;
 
 		leadObject.position = transform.position + rb.velocity * timeToTarget;
 	}
