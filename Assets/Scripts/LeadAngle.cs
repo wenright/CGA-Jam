@@ -17,6 +17,10 @@ public class LeadAngle : MonoBehaviour {
 	}
 
 	void Update () {
+		if (player == null) {
+			return;
+		}
+
 		float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
 		float timeToTarget = distanceToPlayer / laserSpeed;
