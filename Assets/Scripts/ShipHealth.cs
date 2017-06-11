@@ -32,6 +32,14 @@ public class ShipHealth : MonoBehaviour {
 
 		if (health <= 0) {
 			Instantiate(explosionObject, transform.position, transform.rotation);
+
+			if (isPlayer) {
+				Camera.main.transform.parent = null;
+				Camera.main.transform.position += new Vector3(-32, 42, -25);
+				Camera.main.transform.LookAt(transform);
+				HideFlash();
+			}
+
 			Destroy(gameObject);
 		}
 	}
