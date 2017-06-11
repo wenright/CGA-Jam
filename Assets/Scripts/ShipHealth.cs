@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipHealth : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class ShipHealth : MonoBehaviour {
 	public GameObject flashImage;
 
 	public GameObject explosionObject;
+
+	public Slider healthBar;
 
 	void Start () {
 		
@@ -21,6 +24,10 @@ public class ShipHealth : MonoBehaviour {
 		if (isPlayer && flashImage != null) {
 			flashImage.SetActive(true);
 			Invoke("HideFlash", 0.05f);
+
+			if (healthBar != null) {
+				healthBar.value = this.health;
+			}
 		}
 
 		if (health <= 0) {
