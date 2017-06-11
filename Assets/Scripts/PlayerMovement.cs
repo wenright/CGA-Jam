@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Text speedText;
 
 	private Rigidbody rb;
-	private float speed = 4000.0f;
+	private float speed = 5500.0f;
 	private float rotationSpeed = 2000.0f;
 
 	void Start () {

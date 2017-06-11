@@ -6,7 +6,7 @@ public class Laser : MonoBehaviour {
 
 	public GameObject hitParticleSystem;
 
-	public const int speed = 400;
+	public const int speed = 500;
 
 	private Vector3 lastPosition;
 
