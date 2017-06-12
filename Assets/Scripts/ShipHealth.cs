@@ -32,15 +32,20 @@ public class ShipHealth : MonoBehaviour {
 		}
 
 		if (health <= 0) {
-			Instantiate(explosionObject, transform.position, transform.rotation);
+			GameObject explosionInstance = Instantiate(explosionObject, transform.position, transform.rotation) as GameObject;
 
 			if (isPlayer) {
 				Camera.main.transform.parent = null;
 
-				// I just picked these numbers at random. Maybe use an RNG and tween into position, or even slow down time?
-				Vector3 newPosition = Camera.main.transform.position + new Vector3(-32, 42, -25);
-				Camera.mina.transform.DOMove(newPosition, 2.0f).SetEase(Ease.OutQuad);
-				Camera.main.transform.LookAt(transform);
+				float offsetDistance = 150.0f;
+				Vector3 randomOffset = new Vector3(Random.value, Random.value, Random.value).normalized * offsetDistance;
+				Vector3 newPosition = Camera.main.transform.position + randomOffset;
+
+				Camera.main.transform.DOMove(newPosition, 2.0f)
+					.SetEase(Ease.OutQuad);
+
+				Camera.main.transform.DOLookAt(explosionInstance.transform.position, 1.0f)
+					.SetEase(Ease.OutQuad);
 
 				HideFlash();
 			}
