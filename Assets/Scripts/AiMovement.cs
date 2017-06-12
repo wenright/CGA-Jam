@@ -7,7 +7,7 @@ public class AiMovement : MonoBehaviour {
 	public Transform target;
 
 	private float speed = 4000.0f;
-	private float rotationSpeed = 400.0f;
+	private float rotationSpeed = 15000.0f;
 
 	private int breakAwayDistance = 100;
 	private Vector3 breakAwayOffset;
@@ -41,14 +41,14 @@ public class AiMovement : MonoBehaviour {
 
 				Vector3 targetVector = target.position - transform.position;
 				float angleBetween = Vector3.Angle(transform.forward, targetVector);
-				if (angleBetween <= 20) {
-					MoveTowardsTarget();
-				}
 
 				if (angleBetween <= 10) {
 					weaponController.Fire();
 				}
 			}
+
+			// TODO is there any reason why the AI wouldn't always be at full throttle?
+			rb.AddForce(transform.forward * speed * Time.fixedDeltaTime);			
 		}
 	}
 
@@ -58,13 +58,9 @@ public class AiMovement : MonoBehaviour {
 		Vector3 torque = new Vector3(
 			Mathf.DeltaAngle(currentAngle.x, targetAngle.x),
 			Mathf.DeltaAngle(currentAngle.y, targetAngle.y),
-			Mathf.DeltaAngle(currentAngle.z, targetAngle.z));
+			Mathf.DeltaAngle(currentAngle.z, targetAngle.z)).normalized;
 
 		rb.AddRelativeTorque(torque * Time.deltaTime * rotationSpeed);
-	}
-
-	private void MoveTowardsTarget () {
-		rb.AddForce(transform.forward * speed * Time.fixedDeltaTime);
 	}
 
 	// Move away form the target as fast as possible, gaining gorund while preparing to turn to engage
@@ -74,10 +70,8 @@ public class AiMovement : MonoBehaviour {
 		Vector3 torque = new Vector3(
 			Mathf.DeltaAngle(currentAngle.x, targetAngle.x),
 			Mathf.DeltaAngle(currentAngle.y, targetAngle.y),
-			Mathf.DeltaAngle(currentAngle.z, targetAngle.z));
+			Mathf.DeltaAngle(currentAngle.z, targetAngle.z)).normalized;
 
 		rb.AddRelativeTorque(torque * Time.deltaTime * rotationSpeed);
-
-		rb.AddForce(transform.forward * speed * Time.fixedDeltaTime);
 	}
 }
