@@ -14,6 +14,12 @@ public class WeaponController : MonoBehaviour {
 
 	private bool canFire = true;
 
+	private Rigidbody rb;
+
+	void Start () {
+		rb = GetComponent<Rigidbody>();
+	}
+
 	void Update () {
 		if (isPlayer) {
 			if (Input.GetButton("Fire1")) {
@@ -26,7 +32,9 @@ public class WeaponController : MonoBehaviour {
 		if (canFire) {
 			Vector3 randomness = new Vector3(Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy));
 			Vector3 angleOffset = new Vector3(0, 90, 90) + randomness;
-			Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(angleOffset));
+
+			GameObject laserInstance = Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(angleOffset)) as GameObject;
+			laserInstance.GetComponent<Laser>().parentSpeed = rb.velocity;
 
 			canFire = false;
 			Invoke("ResetCanFire", ROF);

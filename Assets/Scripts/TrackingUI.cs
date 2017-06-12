@@ -29,16 +29,18 @@ public class TrackingUI : MonoBehaviour {
 
 		Vector3 coord = Camera.main.WorldToScreenPoint(target.position);
 
-		if (rect.Contains(coord)) {
+		// TODO if target is behind player, pointer should point towards one side or the other, depending on which is closer
+
+		if (rect.Contains(coord) && coord.z > 0) {
 			image.enabled = false;
 		} else {
 			image.enabled = true;
+
 			coord = new Vector3(Mathf.Clamp(coord.x, rect.xMin, rect.xMax), Mathf.Clamp(coord.y, rect.yMin, rect.yMax), 0);
 			imagePosition.anchoredPosition = coord;
 
-			// Quaternion rotation = Quaternion.LookRotation(target.position - player.position);
-			// imagePosition.eulerAngles = new Vector3(imagePosition.eulerAngles.x, imagePosition.eulerAngles.y, imagePosition.eulerAngles.y + rotation.eulerAngles.z);
-			// imagePosition.localEulerAngles = new Vector3(0, 0, rotation.eulerAngles.z);
+			Vector3 projected = Vector3.ProjectOnPlane((target.position - canvas.transform.position).normalized, canvas.transform.forward);
+			imagePosition.localRotation = Quaternion.Euler(0, 0, Vector3.Angle(projected, canvas.transform.up));
 		}
 	}
 }

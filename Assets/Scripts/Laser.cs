@@ -7,6 +7,8 @@ public class Laser : MonoBehaviour {
 	public GameObject hitParticleSystem;
 
 	public const int speed = 500;
+	// TODO if using parent speed, lead object marker needs to be updated so that it is more accurate at that velocity
+	public Vector3 parentSpeed = Vector3.zero;
 
 	private Vector3 lastPosition;
 
@@ -15,6 +17,7 @@ public class Laser : MonoBehaviour {
 	}
 
 	void Update () {
+		// TODO use parent speed to make firing at high speeds more realistic
 		transform.Translate(Vector3.up * speed * Time.deltaTime);
 
 		RaycastHit hit;
