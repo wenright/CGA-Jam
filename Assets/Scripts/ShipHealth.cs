@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ShipHealth : MonoBehaviour {
 
@@ -37,7 +38,8 @@ public class ShipHealth : MonoBehaviour {
 				Camera.main.transform.parent = null;
 
 				// I just picked these numbers at random. Maybe use an RNG and tween into position, or even slow down time?
-				Camera.main.transform.position += new Vector3(-32, 42, -25);
+				Vector3 newPosition = Camera.main.transform.position + new Vector3(-32, 42, -25);
+				Camera.mina.transform.DOMove(newPosition, 2.0f).SetEase(Ease.OutQuad);
 				Camera.main.transform.LookAt(transform);
 
 				HideFlash();

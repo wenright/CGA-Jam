@@ -38,17 +38,17 @@ public class AiMovement : MonoBehaviour {
 				breakAwayDistance = 100;
 
 				RotateTowardsTarget();
-
-				Vector3 targetVector = target.position - transform.position;
-				float angleBetween = Vector3.Angle(transform.forward, targetVector);
-
-				if (angleBetween <= 10) {
-					weaponController.Fire();
-				}
 			}
 
 			// TODO is there any reason why the AI wouldn't always be at full throttle?
 			rb.AddForce(transform.forward * speed * Time.fixedDeltaTime);			
+
+			Vector3 targetVector = target.position - transform.position;
+			float angleBetween = Vector3.Angle(transform.forward, targetVector);
+
+			if (angleBetween <= 10) {
+				weaponController.Fire();
+			}
 		}
 	}
 
