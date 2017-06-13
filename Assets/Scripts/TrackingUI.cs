@@ -36,7 +36,12 @@ public class TrackingUI : MonoBehaviour {
 		} else {
 			image.enabled = true;
 
-			coord = new Vector3(Mathf.Clamp(coord.x, rect.xMin, rect.xMax), Mathf.Clamp(coord.y, rect.yMin, rect.yMax), 0);
+			float scalar = 1.0f;
+			if (coord.z < 0) {
+				scalar = 400.0f;
+			}
+
+			coord = new Vector3(Mathf.Clamp(coord.x * scalar, rect.xMin, rect.xMax), Mathf.Clamp(coord.y * scalar, rect.yMin, rect.yMax), 0);
 			imagePosition.anchoredPosition = coord;
 
 			Vector3 projected = Vector3.ProjectOnPlane((target.position - canvas.transform.position).normalized, canvas.transform.forward);
