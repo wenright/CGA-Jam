@@ -26,4 +26,12 @@ public class LeadAngle : MonoBehaviour {
 
 		leadObject.position = transform.position + rb.velocity * timeToTarget;
 	}
+
+	public void ShowLead () {
+		leadObject.gameObject.SetActive(true);
+	}
+
+	public void HideLead () {
+		leadObject.gameObject.SetActive(false);
+	}
 }

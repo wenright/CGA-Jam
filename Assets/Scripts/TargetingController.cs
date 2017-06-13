@@ -17,11 +17,17 @@ public class TargetingController : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown("CycleTarget")) {
 			if (enemies.Count > 0) {
+				if (target != null) {
+					target.gameObject.GetComponent<LeadAngle>().HideLead();
+				}
+
 				i = (i + 1) % enemies.Count;
 
 				target = enemies[i].transform;
 
 				trackingUI.target = target;
+
+				target.gameObject.GetComponent<LeadAngle>().ShowLead();
 			}
 		}
 	}

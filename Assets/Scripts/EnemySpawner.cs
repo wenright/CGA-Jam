@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
 	private void SpawnEnemy (GameObject enemy) {
 		numLeft++;
 
-		float offsetDistance = 100.0f;
+		float offsetDistance = 1000.0f;
 		Vector3 randomOffset = new Vector3(Random.value, Random.value, Random.value).normalized * offsetDistance;
 		GameObject enemyInstance = Instantiate(enemy, transform.position + randomOffset, Quaternion.identity) as GameObject;
 		GameObject.FindWithTag("TargetingController").GetComponent<TargetingController>().Add(enemyInstance);
