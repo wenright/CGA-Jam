@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public Rigidbody playerRb;
 	public GameObject[] enemies;
-	public static int numToSpawn = 1;
+	public static int numToSpawn = 2;
 	public int startDelay = 5;
 	public Text enemiesText;
 	public Text warpText;
