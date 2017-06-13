@@ -19,6 +19,14 @@ public class AiMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 
 		weaponController = GetComponent<WeaponController>();
+
+		if (target == null) {
+			GameObject playerObject = GameObject.FindWithTag("Player");
+
+			if (playerObject != null) {
+				target = playerObject.transform;				
+			}
+		}
 	}
 	
 	void Update () {

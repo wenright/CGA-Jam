@@ -31,7 +31,7 @@ public class Laser : MonoBehaviour {
 
 	void Hit (RaycastHit hit) {
 		// TODO damage target here
-		if (hit.transform.tag == "Ship") {
+		if (hit.transform.tag == "Ship" || hit.transform.tag == "Player") {
 			ShipHealth sh = hit.transform.gameObject.GetComponent<ShipHealth>();
 			sh.Hit(25);
 		}
