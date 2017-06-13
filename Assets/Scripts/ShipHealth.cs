@@ -10,6 +10,8 @@ public class ShipHealth : MonoBehaviour {
 
 	public bool isPlayer = false;
 	public GameObject flashImage;
+	public GameObject gameOverText;
+	public GameObject hud;
 
 	public GameObject explosionObject;
 	public GameObject shipCorpseObject;
@@ -49,12 +51,14 @@ public class ShipHealth : MonoBehaviour {
 				Vector3 newPosition = Camera.main.transform.position + randomOffset;
 
 				Camera.main.transform.DOMove(newPosition, 2.0f)
-					.SetEase(Ease.OutQuad);
+					.SetEase(Ease.InOutQuad)
+					.OnComplete(() => gameOverText.SetActive(true));
 
 				Camera.main.transform.DOLookAt(explosionInstance.transform.position, 1.0f)
-					.SetEase(Ease.OutQuad);
+					.SetEase(Ease.InOutQuad);
 
 				HideFlash();
+				hud.SetActive(false);
 			} else {
 				GameObject.FindWithTag("TargetingController").GetComponent<TargetingController>().Remove(gameObject);
 				GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>().DestroyEnemy();
