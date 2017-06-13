@@ -7,6 +7,9 @@ public class WeaponController : MonoBehaviour {
 	public GameObject laser;
 	public Transform barrel;
 
+	public AudioClip laserSound;
+	public AudioSource audioSource;
+
 	public bool isPlayer = false;
 
 	public float ROF = 0.15f;
@@ -30,6 +33,8 @@ public class WeaponController : MonoBehaviour {
 
 	public void Fire () {
 		if (canFire) {
+			audioSource.PlayOneShot(laserSound, 0.5f);
+
 			Vector3 randomness = new Vector3(Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy), Random.Range(-this.accuracy, this.accuracy));
 			Vector3 angleOffset = new Vector3(0, 90, 90) + randomness;
 
