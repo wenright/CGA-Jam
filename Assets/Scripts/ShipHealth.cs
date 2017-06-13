@@ -55,6 +55,8 @@ public class ShipHealth : MonoBehaviour {
 					.SetEase(Ease.OutQuad);
 
 				HideFlash();
+			} else {
+				GameObject.FindWithTag("TargetingController").GetComponent<TargetingController>().Remove(gameObject);
 			}
 
 			Destroy(gameObject);
