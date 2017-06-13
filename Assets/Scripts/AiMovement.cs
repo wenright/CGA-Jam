@@ -15,6 +15,8 @@ public class AiMovement : MonoBehaviour {
 	private Rigidbody rb;
 	private WeaponController weaponController;
 
+	private bool canEngage = false;
+
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 
@@ -27,6 +29,8 @@ public class AiMovement : MonoBehaviour {
 				target = playerObject.transform;				
 			}
 		}
+
+		Invoke("Engage", 5.0f);
 	}
 	
 	void Update () {
@@ -35,15 +39,15 @@ public class AiMovement : MonoBehaviour {
 
 			if (distance < breakAwayDistance) {
 				// If this is the first frame breaking away, set a random offset
-				if (breakAwayDistance != 250) {
+				if (breakAwayDistance != 325) {
 					breakAwayOffset = new Vector3(Random.Range(-45, 45), Random.Range(-45, 45), Random.Range(-45, 45));
 				}
 
-				breakAwayDistance = 250;
+				breakAwayDistance = 325;
 
 				BreakAway();
 			} else {
-				breakAwayDistance = 100;
+				breakAwayDistance = 150;
 
 				RotateTowardsTarget();
 			}
@@ -54,7 +58,7 @@ public class AiMovement : MonoBehaviour {
 			Vector3 targetVector = target.position - transform.position;
 			float angleBetween = Vector3.Angle(transform.forward, targetVector);
 
-			if (angleBetween <= 10 && Vector3.Distance(target.position, transform.position) <= 1250) {
+			if (canEngage && angleBetween <= 10 && Vector3.Distance(target.position, transform.position) <= 1250) {
 				weaponController.Fire();
 			}
 		}
@@ -81,5 +85,9 @@ public class AiMovement : MonoBehaviour {
 			Mathf.DeltaAngle(currentAngle.z, targetAngle.z)).normalized;
 
 		rb.AddRelativeTorque(torque * Time.deltaTime * rotationSpeed);
+	}
+
+	private void Engage () {
+		canEngage = true;
 	}
 }
