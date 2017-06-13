@@ -12,6 +12,7 @@ public class ShipHealth : MonoBehaviour {
 	public GameObject flashImage;
 
 	public GameObject explosionObject;
+	public GameObject shipCorpseObject;
 
 	public Slider healthBar;
 
@@ -32,6 +33,12 @@ public class ShipHealth : MonoBehaviour {
 		}
 
 		if (health <= 0) {
+			// Instantiate a corpse and give it a random torque
+			GameObject corpse = Instantiate(shipCorpseObject, transform.position, transform.rotation) as GameObject;
+			float torqueForce = 7000.0f;
+			corpse.transform.GetChild(0).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * torqueForce);
+			corpse.transform.GetChild(1).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * torqueForce);
+
 			GameObject explosionInstance = Instantiate(explosionObject, transform.position, transform.rotation) as GameObject;
 
 			if (isPlayer) {
