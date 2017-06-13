@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TargetingController : MonoBehaviour {
 
+	public AudioClip nextTargetSound;
+	public AudioSource audioSource;
+
 	public TrackingUI trackingUI;
 	public GameObject targetingCamera;
 
@@ -19,6 +22,8 @@ public class TargetingController : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown("CycleTarget")) {
 			if (enemies.Count > 0) {
+				audioSource.PlayOneShot(nextTargetSound, 0.2f);
+
 				if (target != null) {
 					target.gameObject.GetComponent<LeadAngle>().HideLead();
 				}
