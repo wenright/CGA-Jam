@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class EnemySpawner : MonoBehaviour {
 
+	public Rigidbody playerRb;
 	public GameObject[] enemies;
-	public static int numToSpawn = 2;
+	public static int numToSpawn = 1;
 	public int startDelay = 5;
+	public Text enemiesText;
+	public Text warpText;
 
 	private int numLeft = 0;
 
@@ -16,6 +21,15 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	private void StartSpawning () {
+		enemiesText.gameObject.SetActive(true);
+		if (numToSpawn == 1) {
+			enemiesText.text = "1 hostile detected!";
+		} else {
+			enemiesText.text = numToSpawn + " hostiles detected!";			
+		}
+
+		Invoke("HideEnemiesText", 1.0f);
+
 		for (int i = 0; i < numToSpawn; i++) {
 			SpawnEnemy(enemies[Random.Range(0, enemies.Length - 1)]);
 		}	
@@ -34,12 +48,21 @@ public class EnemySpawner : MonoBehaviour {
 		numLeft--;
 
 		if (numLeft == 0) {
-			numToSpawn *= 2;
+			numToSpawn = (int) ((numToSpawn + 1) * 1.25f);
+			warpText.gameObject.SetActive(true);
 			Invoke("LoadNextScene", 2.0f);
+
+			playerRb.angularVelocity = Vector3.zero;
+			playerRb.DORotate(Vector3.zero, 2f).SetEase(Ease.InOutQuad);
+			playerRb.gameObject.GetComponent<PlayerMovement>().enabled = false;
 		}
 	}
 
 	private void LoadNextScene () {
 		SceneManager.LoadScene("game");
+	}
+
+	private void HideEnemiesText () {
+		enemiesText.gameObject.SetActive(false);
 	}
 }
