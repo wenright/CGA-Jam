@@ -44,9 +44,9 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		// Roll
-		if (Input.GetKey("u")) {
+		if (Input.GetKey("a")) {
 			rb.AddRelativeTorque(0, 0, rotationSpeed * Time.fixedDeltaTime);
-		} else if (Input.GetKey("o")) {
+		} else if (Input.GetKey("d")) {
 			rb.AddRelativeTorque(0, 0, -rotationSpeed * Time.fixedDeltaTime);
 		}
 

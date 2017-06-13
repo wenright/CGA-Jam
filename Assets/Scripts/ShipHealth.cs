@@ -37,7 +37,7 @@ public class ShipHealth : MonoBehaviour {
 			GameObject corpse = Instantiate(shipCorpseObject, transform.position, transform.rotation) as GameObject;
 			float torqueForce = 7000.0f;
 			corpse.transform.GetChild(0).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * torqueForce);
-			corpse.transform.GetChild(1).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * torqueForce);
+			corpse.transform.GetChild(1).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * (torqueForce / 3));
 
 			GameObject explosionInstance = Instantiate(explosionObject, transform.position, transform.rotation) as GameObject;
 
@@ -57,6 +57,7 @@ public class ShipHealth : MonoBehaviour {
 				HideFlash();
 			} else {
 				GameObject.FindWithTag("TargetingController").GetComponent<TargetingController>().Remove(gameObject);
+				GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>().DestroyEnemy();
 			}
 
 			Destroy(gameObject);
