@@ -12,11 +12,10 @@ public class LeadAngle : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+		player = GameObject.FindWithTag("Player").transform;
 	}
 
 	void Update () {
-		// TODO lead angle icon should be a GUI object so that it does not scale with distance
-
 		if (player == null) {
 			return;
 		}
