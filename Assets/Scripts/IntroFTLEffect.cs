@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class IntroFTLEffect : MonoBehaviour {
 
 	public CameraShake cameraShake;
 	public PlayerMovement playerMovement;
+	public Text speedText;
 
 	void Start () {
 		playerMovement.enabled = false;

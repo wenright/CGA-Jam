@@ -6,7 +6,8 @@ using DG.Tweening;
 
 public class ShipHealth : MonoBehaviour {
 
-	public int health = 100;
+	public int maxHealth = 100;
+	private int health;
 
 	public bool isPlayer = false;
 	public GameObject flashImage;
@@ -19,7 +20,7 @@ public class ShipHealth : MonoBehaviour {
 	public Slider healthBar;
 
 	void Start () {
-		
+		health = maxHealth;
 	}
 	
 	public void Hit (int damage) {
@@ -30,7 +31,7 @@ public class ShipHealth : MonoBehaviour {
 			Invoke("HideFlash", 0.05f);
 
 			if (healthBar != null) {
-				healthBar.value = this.health;
+				healthBar.value = 1.0f * health / maxHealth;
 			}
 		}
 

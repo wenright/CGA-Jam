@@ -5,10 +5,12 @@ using UnityEngine;
 public class TargetingController : MonoBehaviour {
 
 	public TrackingUI trackingUI;
+	public GameObject targetingCamera;
 
 	private Transform target;
 	private List<GameObject> enemies;
 	private int i = 0;
+	private Vector3 cameraOffset = new Vector3(25, 50, -24);
 
 	void Start () {
 		enemies = new List<GameObject>();
@@ -29,6 +31,15 @@ public class TargetingController : MonoBehaviour {
 
 				target.gameObject.GetComponent<LeadAngle>().ShowLead();
 			}
+		}
+
+		if (target == null) {
+			targetingCamera.SetActive(false);
+		} else {
+			targetingCamera.SetActive(true);
+
+			targetingCamera.transform.position = target.position + cameraOffset;
+			targetingCamera.transform.LookAt(target.position);
 		}
 	}
 

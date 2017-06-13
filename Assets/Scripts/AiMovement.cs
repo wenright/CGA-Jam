@@ -54,8 +54,7 @@ public class AiMovement : MonoBehaviour {
 			Vector3 targetVector = target.position - transform.position;
 			float angleBetween = Vector3.Angle(transform.forward, targetVector);
 
-			print(Vector3.Distance(target.position, transform.position));
-			if (angleBetween <= 10 && Vector3.Distance(target.position, transform.position) <= 1500) {
+			if (angleBetween <= 10 && Vector3.Distance(target.position, transform.position) <= 1250) {
 				weaponController.Fire();
 			}
 		}
