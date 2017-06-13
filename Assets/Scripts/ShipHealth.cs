@@ -72,4 +72,8 @@ public class ShipHealth : MonoBehaviour {
 	private void HideFlash () {
 		flashImage.SetActive(false);
 	}
+
+	public float GetHealthPercentage () {
+		return 1.0f * health / maxHealth;
+	}
 }

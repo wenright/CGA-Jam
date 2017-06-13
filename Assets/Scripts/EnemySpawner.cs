@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour {
 		if (numToSpawn == 1) {
 			enemiesText.text = "1 hostile detected!";
 		} else {
-			enemiesText.text = numToSpawn + " hostiles detected!";			
+			enemiesText.text = numToSpawn + " enemies detected!";			
 		}
 
 		Invoke("HideEnemiesText", 1.0f);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetingController : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class TargetingController : MonoBehaviour {
 
 	public TrackingUI trackingUI;
 	public GameObject targetingCamera;
+
+	public Text targetHealthText;
 
 	private Transform target;
 	private List<GameObject> enemies;
@@ -45,6 +48,8 @@ public class TargetingController : MonoBehaviour {
 
 			targetingCamera.transform.position = target.position + cameraOffset;
 			targetingCamera.transform.LookAt(target.position);
+
+			targetHealthText.text = "Hull " + ((int) (target.gameObject.GetComponent<ShipHealth>().GetHealthPercentage() * 100)).ToString() + "%";
 		}
 	}
 
