@@ -9,14 +9,16 @@ public class EnemySpawner : MonoBehaviour {
 
 	public Rigidbody playerRb;
 	public GameObject[] enemies;
-	public static int numToSpawn = 1;
+	public static int maxToSpawn = 1;
 	public int startDelay = 5;
 	public Text enemiesText;
 	public Text warpText;
 
+	private int numToSpawn;
 	private int numLeft = 0;
 
 	void Start () {
+		numToSpawn = Random.Range(1, maxToSpawn);
 		Invoke("StartSpawning", startDelay);	
 	}
 
@@ -48,7 +50,7 @@ public class EnemySpawner : MonoBehaviour {
 		numLeft--;
 
 		if (numLeft == 0) {
-			numToSpawn = (int) ((numToSpawn + 1) * 1.25f);
+			maxToSpawn = (int) ((maxToSpawn + 1) * 1.25f);
 			warpText.gameObject.SetActive(true);
 			Invoke("LoadNextScene", 2.0f);
 
