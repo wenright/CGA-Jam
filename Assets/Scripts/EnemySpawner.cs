@@ -71,7 +71,9 @@ public class EnemySpawner : MonoBehaviour {
 					break;
 			}
 
-			maxToSpawn = (int) ((maxToSpawn + 1) * 1.25f);
+			if (Random.value > 0.1f) {
+				maxToSpawn++;
+			}
 			warpText.gameObject.SetActive(true);
 			Invoke("LoadNextScene", 2.0f);
 
