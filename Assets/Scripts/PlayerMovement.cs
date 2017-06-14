@@ -17,36 +17,28 @@ public class PlayerMovement : MonoBehaviour {
 	
 	void FixedUpdate () {
 		// Forward Thrust
-		if (Input.GetKey("w")) {
+		if (Input.GetButton("Thrust")) {
 			rb.AddForce(transform.forward * speed * Time.fixedDeltaTime);
 		}
 
-		// Strafing
-		if (Input.GetKey("a")) {
-			rb.AddForce(transform.right * -(speed / 4) * Time.fixedDeltaTime);
-		} else if (Input.GetKey("d")) {
-			rb.AddForce(transform.right * (speed / 4) * Time.fixedDeltaTime);
-		}
-
-
 		// Pitch
-		if (Input.GetKey("i")) {
+		if (Input.GetButton("PitchDown")) {
 			rb.AddRelativeTorque(rotationSpeed * Time.fixedDeltaTime, 0, 0);
-		} else if (Input.GetKey("k")) {
+		} else if (Input.GetButton("PitchUp")) {
 			rb.AddRelativeTorque(-rotationSpeed * Time.fixedDeltaTime, 0, 0);
 		}
 
 		// Yaw
-		if (Input.GetKey("j")) {
+		if (Input.GetButton("YawLeft")) {
 			rb.AddRelativeTorque(0, -rotationSpeed * Time.fixedDeltaTime, 0);
-		} else if (Input.GetKey("l")) {
+		} else if (Input.GetButton("YawRight")) {
 			rb.AddRelativeTorque(0, rotationSpeed * Time.fixedDeltaTime, 0);
 		}
 
 		// Roll
-		if (Input.GetKey("a")) {
+		if (Input.GetButton("RollLeft")) {
 			rb.AddRelativeTorque(0, 0, rotationSpeed * Time.fixedDeltaTime);
-		} else if (Input.GetKey("d")) {
+		} else if (Input.GetButton("RollRight")) {
 			rb.AddRelativeTorque(0, 0, -rotationSpeed * Time.fixedDeltaTime);
 		}
 

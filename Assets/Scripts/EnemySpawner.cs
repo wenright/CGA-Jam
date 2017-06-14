@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour {
 
 		if (numLeft == 0) {
 			// Apply upgrades to player
-			int type = Random.Range(0, 2);
+			int type = Random.Range(0, 3);
 			switch (type) {
 				case 0:
 					PlayerUpgrades.health += 25;
