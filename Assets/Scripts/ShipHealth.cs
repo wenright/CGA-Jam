@@ -7,7 +7,7 @@ using DG.Tweening;
 public class ShipHealth : MonoBehaviour {
 
 	public int maxHealth = 100;
-	private int health;
+	public int health;
 
 	public bool isPlayer = false;
 	public bool isCorpse = false;

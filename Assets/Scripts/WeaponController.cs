@@ -14,6 +14,7 @@ public class WeaponController : MonoBehaviour {
 
 	public float ROF = 0.15f;
 	public float accuracy = 1.0f;
+	public int damage = 25;
 
 	private bool canFire = true;
 
@@ -39,7 +40,9 @@ public class WeaponController : MonoBehaviour {
 			Vector3 angleOffset = new Vector3(0, 90, 90) + randomness;
 
 			GameObject laserInstance = Instantiate(laser, barrel.position, transform.rotation * Quaternion.Euler(angleOffset)) as GameObject;
-			laserInstance.GetComponent<Laser>().parentSpeed = rb.velocity;
+			Laser laserComponent = laserInstance.GetComponent<Laser>();
+			laserComponent.parentSpeed = rb.velocity;
+			laserComponent.damage = this.damage;
 
 			canFire = false;
 			Invoke("ResetCanFire", ROF);

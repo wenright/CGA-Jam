@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour {
 	public GameObject hitParticleSystem;
 
 	public const int speed = 500;
+	public int damage = 25;
 	// TODO if using parent speed, lead object marker needs to be updated so that it is more accurate at that velocity
 	public Vector3 parentSpeed = Vector3.zero;
 
@@ -33,7 +34,7 @@ public class Laser : MonoBehaviour {
 		// TODO damage target here
 		if (hit.transform.tag == "Ship" || hit.transform.tag == "Player") {
 			ShipHealth sh = hit.transform.gameObject.GetComponent<ShipHealth>();
-			sh.Hit(25);
+			sh.Hit(damage);
 		}
 
 		Instantiate(hitParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
