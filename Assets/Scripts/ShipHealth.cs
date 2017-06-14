@@ -11,9 +11,8 @@ public class ShipHealth : MonoBehaviour {
 
 	public bool isPlayer = false;
 	public bool isCorpse = false;
+
 	public GameObject flashImage;
-	public GameObject gameOverText;
-	public GameObject hud;
 
 	public GameObject explosionObject;
 	public GameObject shipCorpseObject;
@@ -51,21 +50,7 @@ public class ShipHealth : MonoBehaviour {
 			corpse.transform.GetChild(1).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value, Random.value, Random.value).normalized * (torqueForce / 3));
 
 			if (isPlayer) {
-				Camera.main.transform.parent = null;
-
-				float offsetDistance = 150.0f;
-				Vector3 randomOffset = new Vector3(Random.value, Random.value, Random.value).normalized * offsetDistance;
-				Vector3 newPosition = Camera.main.transform.position + randomOffset;
-
-				Camera.main.transform.DOMove(newPosition, 2.0f)
-					.SetEase(Ease.InOutQuad)
-					.OnComplete(() => gameOverText.SetActive(true));
-
-				Camera.main.transform.DOLookAt(explosionInstance.transform.position, 1.0f)
-					.SetEase(Ease.InOutQuad);
-
-				HideFlash();
-				hud.SetActive(false);
+				GameObject.FindWithTag("GameController").GetComponent<GameController>().GameOver(explosionInstance.transform.position);
 			} else {
 				GameObject.FindWithTag("TargetingController").GetComponent<TargetingController>().Remove(gameObject);
 				GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>().DestroyEnemy();
@@ -75,11 +60,11 @@ public class ShipHealth : MonoBehaviour {
 		}
 	}
 
-	private void HideFlash () {
-		flashImage.SetActive(false);
-	}
-
 	public float GetHealthPercentage () {
 		return 1.0f * health / maxHealth;
+	}
+
+	private void HideFlash () {
+		flashImage.SetActive(false);
 	}
 }
