@@ -47,6 +47,10 @@ public class GameController : MonoBehaviour {
 		// Set all changed variables back to default
 		EnemySpawner.maxToSpawn = 1;
 
+		PlayerUpgrades.ROF = 0.15f;
+		PlayerUpgrades.damage = 25;
+		PlayerUpgrades.health = 150;
+
 		// Reload scene
 		SceneManager.LoadScene("game");
 	}

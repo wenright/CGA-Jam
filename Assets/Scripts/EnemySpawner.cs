@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour {
 	public int startDelay = 5;
 	public Text enemiesText;
 	public Text warpText;
+	public Text upgradeText;
 
 	private int numToSpawn;
 	private int numLeft = 0;
@@ -50,6 +51,25 @@ public class EnemySpawner : MonoBehaviour {
 		numLeft--;
 
 		if (numLeft == 0) {
+			// Apply upgrades to player
+			int type = Random.Range(0, 2);
+			switch (type) {
+				case 0:
+					PlayerUpgrades.health += 25;
+					upgradeText.text = "+HEALTH";
+					break;
+				case 1:
+					PlayerUpgrades.damage += 12;
+					upgradeText.text = "+DAMAGE";
+					break;
+				case 2:
+					PlayerUpgrades.ROF *= 0.9f;
+					upgradeText.text = "+FIRE RATE";
+					break;
+				default:
+					break;
+			}
+
 			maxToSpawn = (int) ((maxToSpawn + 1) * 1.25f);
 			warpText.gameObject.SetActive(true);
 			Invoke("LoadNextScene", 2.0f);
