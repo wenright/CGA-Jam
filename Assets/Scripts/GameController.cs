@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject flashImage;
 	public GameObject gameOverText;
+	public Text scoreText;
 	public GameObject hud;
 
 	private bool gameIsOver = false;
@@ -21,6 +22,9 @@ public class GameController : MonoBehaviour {
 
 	public void GameOver (Vector3 lookAtTarget) {
 		PositionCamera(lookAtTarget);
+
+		// show score
+		scoreText.text = "wave: " + PlayerUpgrades.waves + "\nkills: " + PlayerUpgrades.kills;
 
 		gameIsOver = true;
 	}
@@ -50,6 +54,9 @@ public class GameController : MonoBehaviour {
 		PlayerUpgrades.ROF = 0.15f;
 		PlayerUpgrades.damage = 25;
 		PlayerUpgrades.health = 150;
+
+		PlayerUpgrades.kills = 0;
+		PlayerUpgrades.waves = 0;
 
 		// Reload scene
 		SceneManager.LoadScene("game");

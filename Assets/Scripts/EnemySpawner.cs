@@ -49,6 +49,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void DestroyEnemy () {
 		numLeft--;
+		PlayerUpgrades.kills++;
 
 		if (numLeft == 0) {
 			// Apply upgrades to player
@@ -81,6 +82,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	private void LoadNextScene () {
+		PlayerUpgrades.waves++;
 		SceneManager.LoadScene("game");
 	}
 
